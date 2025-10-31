@@ -13,6 +13,7 @@ import Header from "../../Layout/Header/Header";
 import {signInOrRegisterWithGoogle} from "../../Model/firebaseConfig";
 import LoadingPopup from "../../components/Loading/Loading";
 import VerifyPopup from "../../components/VerifyPopup/VerifyPopup";
+import { buildApiUrl } from '../../config/apiConfig';
 
 
 function LoginPage() {
@@ -49,7 +50,7 @@ function LoginPage() {
             formData.append('username', usr);
             formData.append('password', pwd);
 
-            const response = await fetch('http://217.182.70.161:6969/v1/api/users/login', {
+            const response = await fetch(buildApiUrl('/v1/api/users/login'), {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
@@ -96,7 +97,7 @@ function LoginPage() {
             formData.append('password', password);
 
             // Llamar a la API de inicio de sesión con los datos del usuario
-            const response = await fetch('http://217.182.70.161:6969/token', {
+            const response = await fetch(buildApiUrl('/token'), {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded' // Cambiar el tipo de contenido
@@ -128,7 +129,7 @@ function LoginPage() {
     }
 
     async function getUserInfo(): Promise<UserData | void> {
-        const url = 'http://217.182.70.161:6969/v1/api/users/users/me';
+        const url = buildApiUrl('/v1/api/users/users/me');
         const token = localStorage.getItem('token');
         const headers = {
             'accept': 'application/json',

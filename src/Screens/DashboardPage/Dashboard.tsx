@@ -8,6 +8,7 @@ import "./Dashboard.css";
 import CardDetails from "../../components/CardDetails/CardDetails";
 import CustomPopup from "../../components/Popup/CustomPopup";
 import {useNavigate} from "react-router-dom";
+import { buildApiUrl } from '../../config/apiConfig';
 
 interface Post {
     _id: string;
@@ -41,7 +42,7 @@ function Dashboard() {
         const username = UserSingleton.getInstance().getUsername();
         const token = localStorage.getItem("token");
 
-        axios.get(`http://217.182.70.161:6969/v1/api/users/posts/${username}`, {
+        axios.get(buildApiUrl(`/v1/api/users/posts/${username}`), {
             headers: {
                 'Authorization': `Bearer ${token}`,
             },
@@ -60,7 +61,7 @@ function Dashboard() {
     useEffect(() => {
         const token = localStorage.getItem("token");
 
-        const url = "http://217.182.70.161:6969/v1/api/users/users/me";
+        const url = buildApiUrl('/v1/api/users/users/me');
         const headers = {
             accept: "application/json",
             Authorization: `Bearer ${token}`,

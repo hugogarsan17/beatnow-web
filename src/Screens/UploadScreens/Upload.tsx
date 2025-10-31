@@ -14,6 +14,7 @@ import { useTransition, animated } from 'react-spring';
 import Select from 'react-select'
 import Loading from "../../components/Loading/Loading";
 import {useSpring} from "@react-spring/web";
+import { buildApiUrl } from '../../config/apiConfig';
 
 
 interface Beat {
@@ -113,7 +114,7 @@ function Upload() {
     useEffect(() => {
         const token = localStorage.getItem("token");
 
-        const url = "http://217.182.70.161:6969/v1/api/users/users/me";
+        const url = buildApiUrl('/v1/api/users/users/me');
         const headers = {
             accept: "application/json",
             Authorization: `Bearer ${token}`,
@@ -197,7 +198,7 @@ function Upload() {
     async function uploadBeat() {
         setIsLoading(true); // Añade esta línea
 
-        const url = "http://217.182.70.161:6969/v1/api/posts/upload";
+        const url = buildApiUrl('/v1/api/posts/upload');
         const headers = {
             accept: "application/json",
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -313,7 +314,7 @@ function Upload() {
 
 
     async function getUserInfo(token: string): Promise<any> {
-        const url = 'http://217.182.70.161:6969/v1/api/users/users/me';
+        const url = buildApiUrl('/v1/api/users/users/me');
         const headers = {
             'accept': 'application/json',
             'Authorization': `Bearer ${token}` // Corrected string interpolation
