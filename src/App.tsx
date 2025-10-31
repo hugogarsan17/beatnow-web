@@ -1,6 +1,6 @@
 // src/App.tsx
 
-// APIS: http://217.182.70.161:6969/docs#/
+// APIS: Refer to API_BASE_URL in src/config/apiConfig.json (e.g., API_BASE_URL + '/docs#/')
 
 import React, { useEffect, useState, useRef } from 'react';
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';

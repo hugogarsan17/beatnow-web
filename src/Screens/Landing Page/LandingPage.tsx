@@ -11,13 +11,14 @@ import Header from "../../Layout/Header/Header";
 import qr from '../../assets/qrbeatnow.png';
 import {Simulate} from "react-dom/test-utils";
 import click = Simulate.click;
+import { buildApiUrl } from '../../config/apiConfig';
 
 function Landing() {
     const nav = navigator.userAgent;
     const [clicks, setClicks] = React.useState(1);
     const [mobileDisplay, setMobileDisplay] = React.useState(false);
     function qrClick() {
-        window.open("http://217.182.70.161:6969/v1/api/download/android-apk/");
+        window.open(buildApiUrl('/v1/api/download/android-apk/'));
     }
 
     // Controlador de eventos para el evento resize

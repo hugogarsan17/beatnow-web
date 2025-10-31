@@ -11,6 +11,7 @@ import LoginPage from "../../Screens/Login Page/LoginPage";
 import {useNavigate} from "react-router-dom";
 import VerifyPopup from "../../components/VerifyPopup/VerifyPopup";
 import LoadingPopup from "../../components/Loading/Loading";
+import { buildApiUrl } from '../../config/apiConfig';
 
 const passwordRequirements = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,20}$/;
 
@@ -50,7 +51,7 @@ function SignUpPage() {
             return true;
         }
         try {
-            const response_email = await axios.get('http://217.182.70.161:6969/v1/api/users/check-email', {
+            const response_email = await axios.get(buildApiUrl('/v1/api/users/check-email'), {
                 params: { email }
             });
             return response_email.data.status === "ok";
@@ -65,7 +66,7 @@ function SignUpPage() {
             return true;
         }
         try {
-            const response_username = await axios.get('http://217.182.70.161:6969/v1/api/users/check-username', {
+            const response_username = await axios.get(buildApiUrl('/v1/api/users/check-username'), {
                 params: { username }
             });
             return response_username.data.status === "ok";
@@ -115,7 +116,7 @@ function SignUpPage() {
     const getToken = async () => {
         try {
             const response = await axios.post(
-                'http://217.182.70.161:6969/token',
+                buildApiUrl('/token'),
                 new URLSearchParams({
                     grant_type: '',
                     username: username,
@@ -160,7 +161,7 @@ function SignUpPage() {
             message = 'This username is already taken.';
         } else {
             try {
-                const response = await axios.post('http://217.182.70.161:6969/v1/api/users/register', {
+                const response = await axios.post(buildApiUrl('/v1/api/users/register'), {
                     full_name,
                     username,
                     email,
@@ -177,7 +178,7 @@ function SignUpPage() {
                 try {
                     console.log(token);
                     await axios.post(
-                        'http://217.182.70.161:6969/v1/api/mail/send-confirmation/',
+                        buildApiUrl('/v1/api/mail/send-confirmation/'),
                         {},
                         {
                             headers: {

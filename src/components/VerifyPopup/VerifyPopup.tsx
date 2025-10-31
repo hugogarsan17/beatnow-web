@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import VerificationInput from 'react-verification-input';
 import './VerifyPopup.css';
 import {useNavigate} from 'react-router-dom';
+import { buildApiUrl } from '../../config/apiConfig';
 
 interface VerifyPopupProps {
     token: string;
@@ -43,7 +44,7 @@ const VerifyPopup: React.FC<VerifyPopupProps> = ({token}) =>{
         }
 
         try {
-            const response = await fetch(`http://217.182.70.161:6969/v1/api/mail/confirmation/?code=${verificationCode}`, {
+            const response = await fetch(buildApiUrl(`/v1/api/mail/confirmation/?code=${verificationCode}`), {
                 method: 'POST',
                 headers: {
                     'accept': 'application/json',
@@ -75,7 +76,7 @@ const VerifyPopup: React.FC<VerifyPopupProps> = ({token}) =>{
         }
 
         try {
-            const response = await fetch('http://217.182.70.161:6969/v1/api/mail/send-confirmation/', {
+            const response = await fetch(buildApiUrl('/v1/api/mail/send-confirmation/'), {
                 method: 'POST',
                 headers: {
                     'accept': 'application/json',
